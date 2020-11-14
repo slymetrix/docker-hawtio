@@ -1,3 +1,7 @@
 #!/bin/sh
 
+if [ -n "HAWTIO_WHITELIST" ]; then
+    set -- "-Dhawtio.proxyWhitelist=${HAWTIO_WHITELIST}" "-Dhawtio.proxyAllowlist=${HAWTIO_WHITELIST}" "$@"
+fi
+
 exec java --add-modules jdk.attach "$@" -jar /hawtio.jar --port "$HAWTIO_PORT"
